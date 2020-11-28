@@ -7,7 +7,7 @@ const peer = new Peer(undefined, {
   port: "443",
   config: {'iceServers': [
     {url: 'stun:numb.viagenie.ca'},
-    {url: 'turn:numb.viagenie.ca', credential: 'zenith', username: 'zenithtamang147@gmail.com'}
+    {url: 'turn:numb.viagenie.ca', credential: 'rabindra', username: 'rabindratamang147@gmail.com'}
   ]
 }
 });
