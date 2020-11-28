@@ -5,6 +5,11 @@ const peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
   port: "443",
+  config: {'iceServers': [
+    {url: 'stun:stun.l.google.com:19302'},
+    {url: 'turn:numb.viagenie.ca', credential: 'muazkh', username: 'webrtc@live.com'}
+  ]
+}
 });
 
 let myVideoStream;
