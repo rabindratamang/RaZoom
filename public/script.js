@@ -5,11 +5,7 @@ const peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
   port: "443",
-  config: {'iceServers': [
-    {url: 'stun:numb.viagenie.ca'},
-    {url: 'turn:numb.viagenie.ca', credential: 'rabindra', username: 'rabindratamang147@gmail.com'}
-  ]
-}
+  config: {'iceServers': [{ urls: 'turn:13.234.239.38?transport=tcp', username: 'user', credential: 'root' }]}
 });
 
 let myVideoStream;
