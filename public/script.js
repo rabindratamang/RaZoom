@@ -53,7 +53,6 @@ if (username) {
 
   const connectToNewUser = (userId, stream, userName) => {
     const call = peer.call(userId, stream);
-    myCall = call;
     const video = document.createElement("video");
     call.on("stream", (userVideoStream) => {
       addVideoStream(video, userVideoStream);
@@ -159,6 +158,5 @@ const setPlayVideo = () => {
 };
 
 const leaveMeeting = () => {
-  myCall.close(myVideoStream);
 };
 
