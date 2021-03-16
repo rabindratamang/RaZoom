@@ -11,7 +11,6 @@ const peer = new Peer(undefined, {
 let myVideoStream;
 const myVideo = document.createElement("video");
 myVideo.muted = true;
-let dataConnection = null;
 navigator.mediaDevices
   .getUserMedia({
     video: true,
@@ -23,7 +22,6 @@ navigator.mediaDevices
       addVideoStream(myVideo, stream);
 
       peer.on("call", (call) => {
-        dataConnection = call;
         call.answer(stream);
         const video = document.createElement("video");
         call.on("stream", (userVideoStream) => {
@@ -136,6 +134,4 @@ const setPlayVideo = () => {
 };
 
 const leaveMeeting = () => {
-  console.log(dataConnection)
-  dataConnection.close();
 }
