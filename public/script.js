@@ -86,7 +86,7 @@ if (username) {
     if(message.type === "MESSAGE"){
       $("ul").append(`<li class="message"><b>${message.user}</b><br/>${message.text}</li>`);
     } else {
-      $("ul").append(`<li class="message">${message.user} joined the room :D`);
+      $("ul").append(`<li class="message"><b>${message.user} joined the room.</b>`);
     }
     scrollToBottom();
   });
