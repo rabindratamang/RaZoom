@@ -76,13 +76,13 @@ if (username) {
 
   document.addEventListener("keydown", (e) => {
     if (e.which == 13 && text.value.length !== 0) {
-      socket.emit("message", {user: username, message: text.value});
+      socket.emit("message", {user: username, text: text.value});
       text.value = "";
     }
   });
 
   socket.on("createMessage", (message) => {
-    $("ul").append(`<li class="message"><b>${message.username}</b><br/>${message.message}</li>`);
+    $("ul").append(`<li class="message"><b>${message.user}</b><br/>${message.text}</li>`);
     scrollToBottom();
   });
 
