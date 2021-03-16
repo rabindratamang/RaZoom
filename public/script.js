@@ -158,5 +158,6 @@ const setPlayVideo = () => {
 };
 
 const leaveMeeting = () => {
+  peer.disconnect()
 };
 
