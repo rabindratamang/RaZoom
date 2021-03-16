@@ -42,14 +42,14 @@ if (username) {
         });
 
         socket.on("user-connected", (userId, userName) => {
-          socket.emit("message", {type: "USER", user: userName });
-          connectToNewUser(userId, stream);
+          socket.emit("message", {type: "USER", user: userName, text: "joined" });
+          connectToNewUser(userId, stream, userName);
         });
       },
       (err) => console.log(err)
     );
 
-  const connectToNewUser = (userId, stream) => {
+  const connectToNewUser = (userId, stream, userName) => {
     const call = peer.call(userId, stream);
     const video = document.createElement("video");
     call.on("stream", (userVideoStream) => {
@@ -57,6 +57,7 @@ if (username) {
     });
 
     call.on("close", () => {
+      socket.emit("message", {type: "USER", user: userName, text: "left" });
       video.remove();
     });
   };
@@ -87,7 +88,7 @@ if (username) {
       $("ul").append(`<li class="message"><b>${message.user}</b><br/>${message.text}</li>`);
     } else {
       if(message.user != username){
-        $("ul").append(`<li class="message"><b>${message.user} joined the room.</b>`);
+        $("ul").append(`<li class="message"><b>${message.user} ${message.text} the room.</b>`);
       }
     }
     scrollToBottom();
