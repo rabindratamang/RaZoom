@@ -41,7 +41,8 @@ if (username) {
           });
         });
 
-        socket.on("user-connected", (userId) => {
+        socket.on("user-connected", (userId, userName) => {
+          socket.emit("message", {type: "USER", user: userName });
           connectToNewUser(userId, stream);
         });
       },
@@ -61,7 +62,7 @@ if (username) {
   };
 
   peer.on("open", (id) => {
-    socket.emit("join-room", ROOM_ID, id);
+    socket.emit("join-room", ROOM_ID, id, username);
   });
 
   function addVideoStream(video, stream) {
@@ -76,13 +77,17 @@ if (username) {
 
   document.addEventListener("keydown", (e) => {
     if (e.which == 13 && text.value.length !== 0) {
-      socket.emit("message", {user: username, text: text.value});
+      socket.emit("message", {type: "MESSAGE", user: username, text: text.value});
       text.value = "";
     }
   });
 
   socket.on("createMessage", (message) => {
-    $("ul").append(`<li class="message"><b>${message.user}</b><br/>${message.text}</li>`);
+    if(message.type === "MESSAGE"){
+      $("ul").append(`<li class="message"><b>${message.user}</b><br/>${message.text}</li>`);
+    } else {
+      $("ul").append(`<li class="message">${message.user} joined the room :D`);
+    }
     scrollToBottom();
   });
 
