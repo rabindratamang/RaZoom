@@ -20,7 +20,7 @@ const peer = new Peer(undefined, {
 let myVideoStream;
 const myVideo = document.createElement("video");
 myVideo.muted = true;
-let myCall;
+let myCall = [];
 const username = prompt("Please enter your name");
 
 if (username) {
@@ -53,6 +53,7 @@ if (username) {
 
   const connectToNewUser = (userId, stream, userName) => {
     const call = peer.call(userId, stream);
+    myCall.push(call);
     const video = document.createElement("video");
     call.on("stream", (userVideoStream) => {
       addVideoStream(video, userVideoStream);
@@ -158,6 +159,8 @@ const setPlayVideo = () => {
 };
 
 const leaveMeeting = () => {
-  peer.disconnect()
+  myCall.forEach(mediaConnection => {
+      mediaConnection.close();
+  });
 };
 
