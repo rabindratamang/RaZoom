@@ -153,5 +153,7 @@ if (username) {
     document.querySelector(".main__video_button").innerHTML = html;
   };
 
-  const leaveMeeting = () => {};
+  const leaveMeeting = () => {
+    window.existingCall.close();
+  };
 }
