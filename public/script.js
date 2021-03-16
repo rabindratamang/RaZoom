@@ -36,6 +36,7 @@ if (username) {
         addVideoStream(myVideo, stream);
 
         peer.on("call", (call) => {
+          myCall.push(call);
           call.answer(stream);
           const video = document.createElement("video");
           call.on("stream", (userVideoStream) => {
@@ -53,7 +54,6 @@ if (username) {
 
   const connectToNewUser = (userId, stream, userName) => {
     const call = peer.call(userId, stream);
-    myCall.push(call);
     const video = document.createElement("video");
     call.on("stream", (userVideoStream) => {
       addVideoStream(video, userVideoStream);
